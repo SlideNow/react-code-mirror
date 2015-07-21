@@ -60,13 +60,15 @@ var CodeMirrorEditor = React.createClass({
     }
   },
 
-  _handleChange: function() {
+  _handleChange: function(doc,change) {
+    delete change['from']
+    delete change['to']
     if (this._editor) {
       var value = this._editor.getValue();
 
       if (value !== this.props.value) {
         if (this.props.onChange) {
-          this.props.onChange({target: {value: value}});
+          this.props.onChange({target: {value: value}, change: change});
         }
 
         if (this._editor.getValue() !== this.props.value) {
