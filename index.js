@@ -60,6 +60,17 @@ var CodeMirrorEditor = React.createClass({
     }
   },
 
+  componentWillReceiveProps: function(nextProps) {
+    var value = nextProps.value
+    if (this._editor) {
+      if (value != null) {
+        if (this._editor.getValue() !== value) {
+          this._editor.setValue(value);
+        }
+      }
+    }
+  },
+
   _handleChange: function(doc,change) {
     delete change['from']
     delete change['to']
