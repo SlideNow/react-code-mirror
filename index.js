@@ -3,6 +3,8 @@ var React = require('react');
 var isMobile = require('./utils/isMobile')();
 var CodeMirror;
 var jsLintAddon;
+var index = 0;
+var length = 0;
 var initCount = 0;
 
 if (!isMobile) {
@@ -64,14 +66,18 @@ var CodeMirrorEditor = React.createClass({
   componentWillReceiveProps: function(nextProps) {
     initCount++;
     //default content init with empty store,reset default content when store content first time emitchange!
-    if(initCount === 2){
-      var value = nextProps.defaultValue
-      if (this._editor) {
-        if (value != null) {
-          if (this._editor.getValue() !== value) {
-            this._editor.setValue(value);
+    if(initCount >= 2){
+      if(index != nextProps.index || length != nextProps.defaultValue.length) {
+          index = nextProps.index;
+          length = nextProps.defaultValue.length;
+          var value = nextProps.defaultValue[index - 1];
+          if (this._editor) {
+            if (value != null) {
+              if (this._editor.getValue() !== value) {
+                this._editor.setValue(value);
+              }
+            }
           }
-        }
       }
     }
   },
