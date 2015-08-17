@@ -65,12 +65,12 @@ var CodeMirrorEditor = React.createClass({
 
   componentWillReceiveProps: function(nextProps) {
     initCount++;
-    //default content init with empty store,reset default content when store content first time emitchange!
+    //content init with empty store,reset content when store content first time emitchange!
     if(initCount >= 2){
-      if(index != nextProps.index || length != nextProps.defaultValue.length) {
+      if(index != nextProps.index || length != nextProps.content.length) {
           index = nextProps.index;
-          length = nextProps.defaultValue.length;
-          var value = nextProps.defaultValue[index - 1];
+          length = nextProps.content.length;
+          var value = nextProps.content[index - 1];
           if (this._editor) {
             if (value != null) {
               if (this._editor.getValue() !== value) {
