@@ -70,7 +70,7 @@ var CodeMirrorEditor = React.createClass({
       if(index != nextProps.index || length != nextProps.content.length) {
           index = nextProps.index;
           length = nextProps.content.length;
-          var value = nextProps.content[index - 1];
+          var value = nextProps.content[index - 1].text;
           if (this._editor) {
             if (value != null) {
               if (this._editor.getValue() !== value) {
